@@ -17,6 +17,10 @@ app = FastAPI(
 )
 register_exception_handlers(app)
 
+
+from app.api.v1 import upload
+
+app.include_router(upload.router)
 app.include_router(auth_router)
 app.include_router(user_router)
 app.include_router(author_router)
