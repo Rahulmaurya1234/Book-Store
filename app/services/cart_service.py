@@ -29,13 +29,20 @@ class CartService:
         self,
         db: Session,
         user_id: int,
-    ):
+        ):
 
-        return self.cart_repository.get_user_cart(
+        cart = self.cart_repository.get_user_cart(
             db,
             user_id,
         )
 
+        if not cart:
+            cart = self.cart_repository.create_cart(
+                db,
+                user_id,
+            )
+
+        return cart
 
     def add_book(
         self,
@@ -50,7 +57,10 @@ class CartService:
         )
 
         if not cart:
-            raise ValueError("Cart not found.")
+            cart = self.cart_repository.create_cart(
+                db,
+                user_id,
+            )
 
         book = self.book_repository.get_by_id(
             db,
