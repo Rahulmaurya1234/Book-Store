@@ -1,4 +1,7 @@
 tech_stack.md
+RDS.md
+secret_manager.md
+aws_cli.md
 .venv
 .vscode
 .env
